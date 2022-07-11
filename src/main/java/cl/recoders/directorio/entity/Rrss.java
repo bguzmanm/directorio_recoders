@@ -3,7 +3,6 @@ package cl.recoders.directorio.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,16 +20,22 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Area {
+public class Rrss {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idarea", nullable = false)
-    private int idArea;
+    @Column(name = "idrrss", nullable = false)
+    private int idRrss;
     @Basic
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
-    @OneToMany(mappedBy = "areaByIdArea")
-    private List<RegistroArea> registroAreasByIdarea;
+    @Basic
+    @Column(name = "url", nullable = false, length = 100)
+    private String url;
+    @Basic
+    @Column(name = "logo", nullable = true, length = 100)
+    private String logo;
+    @OneToMany(mappedBy = "rrssByIdrrss")
+    private List<RegistroRrss> registroRrssesByIdrrss;
 
 
 }

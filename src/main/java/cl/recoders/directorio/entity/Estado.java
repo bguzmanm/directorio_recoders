@@ -1,7 +1,12 @@
 package cl.recoders.directorio.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * directorio
@@ -9,61 +14,21 @@ import java.util.Collection;
  *
  * @author Brian Guzmán M.
  * @version 0.1
- * @since 22-06-22
+ * @since 28-06-22
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Estado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id_estado")
+    @Column(name = "idestado", nullable = false)
     private int idEstado;
     @Basic
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", nullable = false, length = 45)
     private String descripcion;
-    @OneToMany(mappedBy = "estadoByIdEstado")
-    private Collection<RegistroEstado> registroEstadosByIdEstado;
+    @OneToMany(mappedBy = "estadoByEstadoIdestado")
+    private List<RegistroEstado> registroEstadosByIdestado;
 
-    public int getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(int idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Estado estado = (Estado) o;
-
-        if (idEstado != estado.idEstado) return false;
-        if (descripcion != null ? !descripcion.equals(estado.descripcion) : estado.descripcion != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idEstado;
-        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
-        return result;
-    }
-
-    public Collection<RegistroEstado> getRegistroEstadosByIdEstado() {
-        return registroEstadosByIdEstado;
-    }
-
-    public void setRegistroEstadosByIdEstado(Collection<RegistroEstado> registroEstadosByIdEstado) {
-        this.registroEstadosByIdEstado = registroEstadosByIdEstado;
-    }
 }

@@ -1,7 +1,12 @@
 package cl.recoders.directorio.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * directorio
@@ -9,85 +14,33 @@ import java.util.Collection;
  *
  * @author Brian Guzmán M.
  * @version 0.1
- * @since 22-06-22
+ * @since 28-06-22
  */
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Herramienta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id_herramienta")
+    @Column(name = "idherramienta", nullable = false)
     private int idHerramienta;
     @Basic
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
     @Basic
-    @Column(name = "id_tipo_herramienta")
+    @Column(name = "url", nullable = true, length = 100)
+    private String url;
+    @Basic
+    @Column(name = "img", nullable = true, length = 100)
+    private String img;
+    @Basic
+    @Column(name = "idtipo_herramienta", nullable = false)
     private int idTipoHerramienta;
     @ManyToOne
-    @JoinColumn(name = "id_tipo_herramienta", referencedColumnName = "id_tipo_herramienta", nullable = false)
-    private TipoHerramienta tipoHerramientaByIdTipoHerramienta;
-    @OneToMany(mappedBy = "herramientaByIdHerramienta")
-    private Collection<SolicitudHasHerramienta> solicitudHasHerramientasByIdHerramienta;
+    @JoinColumn(name = "idtipo_herramienta", referencedColumnName = "idtipo_herramienta", nullable = false, insertable = false, updatable = false)
+    private TipoHerramienta tipoHerramientaByIdtipoHerramienta;
+    @OneToMany(mappedBy = "herramientaByIdherramienta")
+    private List<RegistroHerramienta> registroHerramientasByIdherramienta;
 
-    public int getIdHerramienta() {
-        return idHerramienta;
-    }
-
-    public void setIdHerramienta(int idHerramienta) {
-        this.idHerramienta = idHerramienta;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getIdTipoHerramienta() {
-        return idTipoHerramienta;
-    }
-
-    public void setIdTipoHerramienta(int idTipoHerramienta) {
-        this.idTipoHerramienta = idTipoHerramienta;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Herramienta that = (Herramienta) o;
-
-        if (idHerramienta != that.idHerramienta) return false;
-        if (idTipoHerramienta != that.idTipoHerramienta) return false;
-        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idHerramienta;
-        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
-        result = 31 * result + idTipoHerramienta;
-        return result;
-    }
-
-    public TipoHerramienta getTipoHerramientaByIdTipoHerramienta() {
-        return tipoHerramientaByIdTipoHerramienta;
-    }
-
-    public void setTipoHerramientaByIdTipoHerramienta(TipoHerramienta tipoHerramientaByIdTipoHerramienta) {
-        this.tipoHerramientaByIdTipoHerramienta = tipoHerramientaByIdTipoHerramienta;
-    }
-
-    public Collection<SolicitudHasHerramienta> getSolicitudHasHerramientasByIdHerramienta() {
-        return solicitudHasHerramientasByIdHerramienta;
-    }
-
-    public void setSolicitudHasHerramientasByIdHerramienta(Collection<SolicitudHasHerramienta> solicitudHasHerramientasByIdHerramienta) {
-        this.solicitudHasHerramientasByIdHerramienta = solicitudHasHerramientasByIdHerramienta;
-    }
 }
