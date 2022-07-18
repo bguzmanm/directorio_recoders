@@ -16,6 +16,7 @@
     <description>directorio</description>
     <properties>
         <java.version>11</java.version>
+        <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
     </properties>
     <dependencies>
         <dependency>
@@ -64,6 +65,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
         </dependency>
 
     </dependencies>
